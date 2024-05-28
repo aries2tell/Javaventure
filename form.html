@@ -22,23 +22,26 @@
 
         h2 {
             margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         form {
-            background-color: rgba(255, 255, 255, 0.8); /* Add transparency */
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 300px;
             margin-bottom: 20px;
+            border: 1px solid #cccccc;
         }
 
         label {
             display: inline-block;
             font-size: 16px;
-            font-family: Arial, Helvetica, sans-serif;
             width: 110px;
+            margin-bottom: 10px;
         }
 
         input,
@@ -46,12 +49,22 @@
             width: 180px;
             height: 30px;
             font-size: 16px;
-            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 10px;
         }
 
         button {
             height: 30px;
             width: 70px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
 
         .table-container {
@@ -69,18 +82,62 @@
             margin-bottom: 20px;
             font-size: 16px;
             text-align: left;
-            background-color: rgba(255, 255, 255, 0.8); /* Add transparency */
+            background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #cccccc;
         }
 
         .section-table th,
         .section-table td {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
+            padding: 12px;
+            border-bottom: 1px solid #cccccc;
         }
 
         .section-table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        .section-table tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+
+        .section-table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .print-button {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .print-button:hover {
+            background-color: #218838;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .section-table,
+            .section-table * {
+                visibility: visible;
+            }
+            .section-table {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: none;
+                box-shadow: none;
+                border: none;
+            }
         }
     </style>
 </head>
@@ -88,10 +145,10 @@
     <h2>Student Form</h2>
     <form id="studentForm">
         <label for="StudentNumber">Student Number</label>
-        <input type="number" id="StudentNumber" required><br><br>
+        <input type="number" id="StudentNumber" required><br>
 
         <label for="FullName">Full Name</label>
-        <input type="text" id="FullName" required><br><br>
+        <input type="text" id="FullName" required><br>
 
         <label for="Section">Section</label>
         <select id="Section" required>
@@ -102,14 +159,14 @@
             <option value="1-5">BSIT 1-5</option>
             <option value="1-6">BSIT 1-6</option>
             <option value="1-7">BSIT 1-7</option>
-        </select><br><br>
+        </select><br>
 
         <button type="button" id="AddBtn">Add</button>
     </form>
 
     <div class="table-container" id="tablesContainer"></div>
 
-    <iframe width="100%" height="500" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSBOZUruUnQ3WPcM8c0H8uZfSsWLoYpjuU3xMPEbdgbvDyE8Y0ugQAgJNaOWUGcsZxo8FWbvELwRX4E/pubhtml"></iframe>
+    <button type="button" class="print-button" onclick="window.print()">Print</button>
 
     <script>
         const mockDatabase = JSON.parse(localStorage.getItem('mockDatabase')) || {};
